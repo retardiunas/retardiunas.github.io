@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retardi (u nás)</title>
+    <!-- Načtení Tailwind CSS pro rychlé rozvržení a responzivitu -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Nastavení písma Inter */
+        html { font-family: 'Inter', sans-serif; }
+        
+        /* Definice CSS animace pro efekt pulzování / blikání - zachována, ale ne pro transformace */
+        @keyframes pulse-glitch {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+
+        /* Základní barvy a ostré prvky (Světlý režim) */
+        body {
+            background-color: #ffffff; /* Bílé pozadí */
+            color: #000000; /* Černý text */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Styly pro sekce - Ostré rohy, jednoduché barvy, žádné stíny */
+        .section-card {
+            border: 3px solid #000000; /* Výrazný černý rámeček */
+            background-color: #f0f0f0; /* Světle šedá výplň */
+            animation: pulse-glitch 2s infinite ease-in-out; /* Aplikace animace (jen opacity) */
+        }
+        
+        /* Tmavý režim: Nastavení barev na základě systémového nastavení */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #000000; /* Ultra tmavé pozadí */
+                color: #00ff00; /* Křiklavě zelený text pro retro efekt */
+            }
+            /* Styly pro sekce v tmavém režimu */
+            .section-card {
+                border: 3px solid #00ff00; /* Křiklavě zelený rámeček */
+                background-color: #111111; /* Tmavě šedá výplň */
+                color: #00ff00;
+                box-shadow: none; /* Odstranění stínů */
+            }
+            /* Úprava barvy nadpisu v tmavém režimu */
+            .glitch-title {
+                color: #ff00ff; /* Křiklavě růžová/magenta pro hlavní nadpis */
+                text-shadow: 2px 2px #00ff00; /* Glitch stín */
+            }
+            /* Odkazy v tmavém režimu */
+            a {
+                color: #00ffff !important; /* Tyrkysové odkazy */
+            }
+            /* Text u odkazů */
+            .list-item-text {
+                color: #00ff00;
+            }
+        }
+        
+        /* Styl pro hlavní nadpis - Zmenšení písma */
+        .glitch-title {
+            font-size: 3.5rem; /* Zmenšeno z 4rem */
+            font-weight: 900;
+            letter-spacing: 0.15em; /* Mírné zmenšení mezery */
+            text-transform: uppercase;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        /* Styl pro obrázek (placeholder) - Odstranění hover animace */
+        .rad-icon {
+            border: 4px solid #ff0000;
+            transition: none; /* Odstranění transformace */
+        }
+        .rad-icon:hover {
+            transform: none; /* Zrušení hover transformace */
+        }
+
+        /* Zajištění responzivity iframe (Discord a Itch.io) */
+        .iframe-container {
+            width: 100%;
+            max-width: 350px; /* Mírné zmenšení */
+        }
+        .discord-iframe, .itch-iframe {
+            width: 100%;
+            height: 450px; /* Zmenšení výšky */
+            border: 2px solid; /* Výrazný rámeček */
+        }
+        .itch-iframe {
+            height: 150px; /* Zmenšení výšky */
+        }
+
+        /* Skrytí scrollbaru na itcho.io embedech, protože jsou vysoké */
+        iframe[src*="itch.io"] {
+            overflow: hidden !important;
+        }
+        
+        /* Odstranění stínů a zaoblení z Tailwind komponent pro jednotný styl */
+        .rounded-xl, .rounded-full, .shadow-xl, .shadow-2xl, .shadow-lg {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+    </style>
+</head>
+<body class="p-4 md:p-6 flex flex-col items-center min-h-screen" style="background-image: url('./bg.gif'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover">
+    <!-- Snížení mezer - z space-y-12 na space-y-8 -->
+    <main class="w-full max-w-4xl space-y-8 text-center">
+
+        <!-- HLAVNÍ HLAVIČKA s glitch efektem -->
+        <!-- Snížení paddingu a odstranění animate-bounce -->
+        <header class="pt-6 pb-2 border-b-4 border-black dark:border-white section-card">
+            <h1 class="glitch-title text-red-600 dark:text-yellow-400 hover:text-red-700 dark:hover:text-yellow-300">
+                RETARDI
+            </h1>
+            <!-- Přidána třída animate-bounce pro poskakující efekt -->
+            <p class="text-lg mt-2 italic font-mono opacity-70 animate-bounce">
+                >> NO TO JSME MY!
+            </p>
+        </header>
+
+        <!-- ÚVODNÍ SEKCE A OBRÁZEK -->
+        <!-- Odstranění hover animace translate-x/y -->
+        <section class="section-card p-5 transition-all duration-300">
+            <!-- Zmenšení písma -->
+            <h2 class="text-2xl font-bold mb-3 border-b-2 pb-1">
+                Zdravíme, my jsme retardi
+            </h2>
+            <p class="text-base mb-4 font-mono">
+                A JSME RADIOAKTIVNÍ! ☢️ <span class="text-red-500 dark:text-yellow-500 font-extrabold">(pozor!)</span>
+            </p>
+            
+            <img 
+                src="Radioaktivitaci.png" 
+                width="160"
+                class="rad-icon mx-auto transition-transform"
+            >
+        </section>
+        
+        <!-- ODKAZY
+        <section class="section-card p-4">
+            <a href="prijmacky.php" class="text-blue-600 dark:text-cyan-400 hover:underline">Počitadlo do příjmaček</a> | <a href="gamesky.php" class="text-blue-600 dark:text-cyan-400 hover:underline">Free steam hry</a>
+        </section> -->
+
+        <!-- DISCORD WIDGET -->
+        <section class="section-card p-4">
+            <!-- Zmenšení písma -->
+            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">NÁŠ DYKSCORD</h2>
+            <div class="iframe-container mx-auto">
+                <!-- Discord iframe -->
+                <iframe 
+                    src="https://discord.com/widget?id=1413566579555438626&theme=dark" 
+                    class="discord-iframe border-black dark:border-green-400"
+                    allowtransparency="true" 
+                    frameborder="0" 
+                    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- NAŠE HRY (Skryté na malých obrazovkách) -->
+        <section class="hidden sm:block section-card p-4">
+            <!-- Zmenšení písma a zmenšení mezery nad ním -->
+            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">NAŠE HRY</h2>
+            <!-- Zmenšení mezery mezi hrami -->
+            <div class="space-y-4">
+                <!-- Hra 1 - Odstranění hover transformace -->
+                <div class="w-full max-w-xl mx-auto transition-transform">
+                    <iframe 
+                        frameborder="0" 
+                        src="https://itch.io/embed/4002684" 
+                        class="itch-iframe border-black dark:border-green-400"
+                        loading="lazy">
+                        <a href="https://existingperson08.itch.io/five-nights-at-filips">Five nights at Filip's (Alpha) by ExistingPerson08</a>
+                    </iframe>
+                </div>
+                <!-- Hra 2 - Odstranění hover transformace -->
+                <div class="w-full max-w-xl mx-auto transition-transform">
+                    <iframe 
+                        frameborder="0" 
+                        src="https://itch.io/embed/4020283" 
+                        class="itch-iframe border-black dark:border-green-400"
+                        loading="lazy">
+                        <a href="https://existingperson08.itch.io/projekt-k">Projekt K by ExistingPerson08</a>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZNAM ČLENŮ -->
+        <section class="section-card p-5">
+            <!-- Zmenšení písma -->
+            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">KDO VŠECHNO JE RETARD?</h2>
+            <!-- Zmenšení písma a mezery -->
+            <div class="max-w-md mx-auto text-left font-mono">
+                <ul class="list-none space-y-2 text-base">
+                    <!-- Použití výrazných barev a efektů pro seznam -->
+                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
+                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> 
+                        <a href="https://existingperson08.github.io" target="_blank" class="text-blue-600 dark:text-cyan-400 hover:underline">
+                            ExistingPerson08
+                        </a> <span class="list-item-text">(Vlasta)</span>
+                    </li>
+                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
+                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> Caprisun <span class="list-item-text">(chleba)</span>
+                    </li>
+                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
+                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> 
+                        <a href="https://soundcloud.com/max-mueller-265471097" target="_blank" class="text-blue-600 dark:text-cyan-400 hover:underline">
+                            "Maxík Taxík"
+                        </a>
+                    </li>
+                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
+                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> Kládař <span class="list-item-text">(Jirka)</span>
+                    </li>
+                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
+                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> Filip (retard/kokot)
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <footer class="text-sm opacity-50 pt-8 pb-4 font-mono">
+            // RETARDI.EXE v1.2 - NO VIRUS //
+        </footer>
+
+    </main>
+</body>
+</html>
