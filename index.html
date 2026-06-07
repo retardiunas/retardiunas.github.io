@@ -1,230 +1,535 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retardi (u nás)</title>
-    <!-- Načtení Tailwind CSS pro rychlé rozvržení a responzivitu -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Nastavení písma Inter */
-        html { font-family: 'Inter', sans-serif; }
-        
-        /* Definice CSS animace pro efekt pulzování / blikání - zachována, ale ne pro transformace */
-        @keyframes pulse-glitch {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Retardi (u nás)</title>
+        <!-- Načtení Tailwind CSS pro rychlé rozvržení a responzivitu -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            /* Nastavení písma Inter */
+            html {
+                font-family: "Inter", sans-serif;
+            }
 
-        /* Základní barvy a ostré prvky (Světlý režim) */
-        body {
-            background-color: #ffffff; /* Bílé pozadí */
-            color: #000000; /* Černý text */
-            transition: background-color 0.3s, color 0.3s;
-        }
+            /* Definice CSS animace pro efekt pulzování / blikání - zachována, ale ne pro transformace */
+            @keyframes pulse-glitch {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.9;
+                }
+            }
 
-        /* Styly pro sekce - Ostré rohy, jednoduché barvy, žádné stíny */
-        .section-card {
-            border: 3px solid #000000; /* Výrazný černý rámeček */
-            background-color: #f0f0f0; /* Světle šedá výplň */
-            animation: pulse-glitch 2s infinite ease-in-out; /* Aplikace animace (jen opacity) */
-        }
-        
-        /* Tmavý režim: Nastavení barev na základě systémového nastavení */
-        @media (prefers-color-scheme: dark) {
+            /* Základní barvy a ostré prvky (Světlý režim) */
             body {
-                background-color: #000000; /* Ultra tmavé pozadí */
-                color: #00ff00; /* Křiklavě zelený text pro retro efekt */
+                background-color: #ffffff; /* Bílé pozadí */
+                color: #000000; /* Černý text */
+                transition:
+                    background-color 0.3s,
+                    color 0.3s;
             }
-            /* Styly pro sekce v tmavém režimu */
+
+            /* Styly pro sekce - Ostré rohy, jednoduché barvy, žádné stíny */
             .section-card {
-                border: 3px solid #00ff00; /* Křiklavě zelený rámeček */
-                background-color: #111111; /* Tmavě šedá výplň */
-                color: #00ff00;
-                box-shadow: none; /* Odstranění stínů */
+                border: 3px solid #000000; /* Výrazný černý rámeček */
+                background-color: #f0f0f0; /* Světle šedá výplň */
+                animation: pulse-glitch 2s infinite ease-in-out; /* Aplikace animace (jen opacity) */
             }
-            /* Úprava barvy nadpisu v tmavém režimu */
+
+            /* Tmavý režim: Nastavení barev na základě systémového nastavení */
+            @media (prefers-color-scheme: dark) {
+                body {
+                    background-color: #000000; /* Ultra tmavé pozadí */
+                    color: #00ff00; /* Křiklavě zelený text pro retro efekt */
+                }
+                /* Styly pro sekce v tmavém režimu */
+                .section-card {
+                    border: 3px solid #00ff00; /* Křiklavě zelený rámeček */
+                    background-color: #111111; /* Tmavě šedá výplň */
+                    color: #00ff00;
+                    box-shadow: none; /* Odstranění stínů */
+                }
+                /* Úprava barvy nadpisu v tmavém režimu */
+                .glitch-title {
+                    color: #ff00ff; /* Křiklavě růžová/magenta pro hlavní nadpis */
+                    text-shadow: 2px 2px #00ff00; /* Glitch stín */
+                }
+                /* Odkazy v tmavém režimu */
+                a {
+                    color: #00ffff !important; /* Tyrkysové odkazy */
+                }
+                /* Text u odkazů */
+                .list-item-text {
+                    color: #00ff00;
+                }
+            }
+
+            /* Styl pro hlavní nadpis - Zmenšení písma */
             .glitch-title {
-                color: #ff00ff; /* Křiklavě růžová/magenta pro hlavní nadpis */
-                text-shadow: 2px 2px #00ff00; /* Glitch stín */
+                font-size: 3.5rem; /* Zmenšeno z 4rem */
+                font-weight: 900;
+                letter-spacing: 0.15em; /* Mírné zmenšení mezery */
+                text-transform: uppercase;
+                transition:
+                    color 0.3s,
+                    text-shadow 0.3s;
             }
-            /* Odkazy v tmavém režimu */
-            a {
-                color: #00ffff !important; /* Tyrkysové odkazy */
+
+            /* Styl pro obrázek (placeholder) - Odstranění hover animace */
+            .rad-icon {
+                border: 4px solid #ff0000;
+                transition: none; /* Odstranění transformace */
             }
-            /* Text u odkazů */
-            .list-item-text {
-                color: #00ff00;
+            .rad-icon:hover {
+                transform: none; /* Zrušení hover transformace */
             }
-        }
-        
-        /* Styl pro hlavní nadpis - Zmenšení písma */
-        .glitch-title {
-            font-size: 3.5rem; /* Zmenšeno z 4rem */
-            font-weight: 900;
-            letter-spacing: 0.15em; /* Mírné zmenšení mezery */
-            text-transform: uppercase;
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        
-        /* Styl pro obrázek (placeholder) - Odstranění hover animace */
-        .rad-icon {
-            border: 4px solid #ff0000;
-            transition: none; /* Odstranění transformace */
-        }
-        .rad-icon:hover {
-            transform: none; /* Zrušení hover transformace */
-        }
 
-        /* Zajištění responzivity iframe (Discord a Itch.io) */
-        .iframe-container {
-            width: 100%;
-            max-width: 350px; /* Mírné zmenšení */
-        }
-        .discord-iframe, .itch-iframe {
-            width: 100%;
-            height: 450px; /* Zmenšení výšky */
-            border: 2px solid; /* Výrazný rámeček */
-        }
-        .itch-iframe {
-            height: 150px; /* Zmenšení výšky */
-        }
+            /* Zajištění responzivity iframe (Discord a Itch.io) */
+            .iframe-container {
+                width: 100%;
+                max-width: 350px; /* Mírné zmenšení */
+            }
+            .discord-iframe,
+            .itch-iframe {
+                width: 100%;
+                height: 450px; /* Zmenšení výšky */
+                border: 2px solid; /* Výrazný rámeček */
+            }
+            .itch-iframe {
+                height: 150px; /* Zmenšení výšky */
+            }
 
-        /* Skrytí scrollbaru na itcho.io embedech, protože jsou vysoké */
-        iframe[src*="itch.io"] {
-            overflow: hidden !important;
-        }
-        
-        /* Odstranění stínů a zaoblení z Tailwind komponent pro jednotný styl */
-        .rounded-xl, .rounded-full, .shadow-xl, .shadow-2xl, .shadow-lg {
-            border-radius: 0 !important;
-            box-shadow: none !important;
-        }
+            /* Skrytí scrollbaru na itcho.io embedech, protože jsou vysoké */
+            iframe[src*="itch.io"] {
+                overflow: hidden !important;
+            }
 
-    </style>
-</head>
-<body class="p-4 md:p-6 flex flex-col items-center min-h-screen" style="background-image: url('./bg.gif'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover">
-    <!-- Snížení mezer - z space-y-12 na space-y-8 -->
-    <main class="w-full max-w-4xl space-y-8 text-center">
-
-        <!-- HLAVNÍ HLAVIČKA s glitch efektem -->
-        <!-- Snížení paddingu a odstranění animate-bounce -->
-        <header class="pt-6 pb-2 border-b-4 border-black dark:border-white section-card">
-            <h1 class="glitch-title text-red-600 dark:text-yellow-400 hover:text-red-700 dark:hover:text-yellow-300">
-                RETARDI
-            </h1>
-            <!-- Přidána třída animate-bounce pro poskakující efekt -->
-            <p class="text-lg mt-2 italic font-mono opacity-70 animate-bounce">
-                >> NO TO JSME MY!
-            </p>
-        </header>
-
-        <!-- ÚVODNÍ SEKCE A OBRÁZEK -->
-        <!-- Odstranění hover animace translate-x/y -->
-        <section class="section-card p-5 transition-all duration-300">
-            <!-- Zmenšení písma -->
-            <h2 class="text-2xl font-bold mb-3 border-b-2 pb-1">
-                Zdravíme, my jsme retardi
-            </h2>
-            <p class="text-base mb-4 font-mono">
-                A JSME RADIOAKTIVNÍ! ☢️ <span class="text-red-500 dark:text-yellow-500 font-extrabold">(pozor!)</span>
-            </p>
-            
-            <img 
-                src="Radioaktivitaci.png" 
-                width="160"
-                class="rad-icon mx-auto transition-transform"
+            /* Odstranění stínů a zaoblení z Tailwind komponent pro jednotný styl */
+            .rounded-xl,
+            .rounded-full,
+            .shadow-xl,
+            .shadow-2xl,
+            .shadow-lg {
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+        </style>
+    </head>
+    <body
+        class="p-4 md:p-6 flex flex-col items-center min-h-screen"
+        style="
+            background-image: url(&quot;./bg.gif&quot;);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        "
+    >
+        <!-- Snížení mezer - z space-y-12 na space-y-8 -->
+        <main class="w-full max-w-4xl space-y-8 text-center">
+            <!-- HLAVNÍ HLAVIČKA s glitch efektem -->
+            <!-- Snížení paddingu a odstranění animate-bounce -->
+            <header
+                class="pt-6 pb-2 border-b-4 border-black dark:border-white section-card"
             >
-        </section>
-        
-        <!-- ODKAZY
+                <h1
+                    class="glitch-title text-red-600 dark:text-yellow-400 hover:text-red-700 dark:hover:text-yellow-300"
+                >
+                    RETARDI
+                </h1>
+                <!-- Přidána třída animate-bounce pro poskakující efekt -->
+                <p
+                    class="text-lg mt-2 italic font-mono opacity-70 animate-bounce"
+                >
+                    >> NO TO JSME MY!
+                </p>
+            </header>
+
+            <!-- ÚVODNÍ SEKCE A OBRÁZEK -->
+            <!-- Odstranění hover animace translate-x/y -->
+            <section class="section-card p-5 transition-all duration-300">
+                <!-- Zmenšení písma -->
+                <h2 class="text-2xl font-bold mb-3 border-b-2 pb-1">
+                    Zdravíme, my jsme retardi
+                </h2>
+                <p class="text-base mb-4 font-mono">
+                    A JSME RADIOAKTIVNÍ! ☢️
+                    <span
+                        class="text-red-500 dark:text-yellow-500 font-extrabold"
+                        >(pozor!)</span
+                    >
+                </p>
+
+                <img
+                    src="Radioaktivitaci.png"
+                    width="160"
+                    class="rad-icon mx-auto transition-transform"
+                />
+            </section>
+
+            <!-- ODKAZY
         <section class="section-card p-4">
             <a href="prijmacky.php" class="text-blue-600 dark:text-cyan-400 hover:underline">Počitadlo do příjmaček</a> | <a href="gamesky.php" class="text-blue-600 dark:text-cyan-400 hover:underline">Free steam hry</a>
         </section> -->
 
-        <!-- DISCORD WIDGET -->
-        <section class="section-card p-4">
-            <!-- Zmenšení písma -->
-            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">NÁŠ DYKSCORD</h2>
-            <div class="iframe-container mx-auto">
-                <!-- Discord iframe -->
-                <iframe 
-                    src="https://discord.com/widget?id=1413566579555438626&theme=dark" 
-                    class="discord-iframe border-black dark:border-green-400"
-                    allowtransparency="true" 
-                    frameborder="0" 
-                    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-                </iframe>
-            </div>
-        </section>
-
-        <!-- NAŠE HRY (Skryté na malých obrazovkách) -->
-        <section class="hidden sm:block section-card p-4">
-            <!-- Zmenšení písma a zmenšení mezery nad ním -->
-            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">NAŠE HRY</h2>
-            <!-- Zmenšení mezery mezi hrami -->
-            <div class="space-y-4">
-                <!-- Hra 1 - Odstranění hover transformace -->
-                <div class="w-full max-w-xl mx-auto transition-transform">
-                    <iframe 
-                        frameborder="0" 
-                        src="https://itch.io/embed/4002684" 
-                        class="itch-iframe border-black dark:border-green-400"
-                        loading="lazy">
-                        <a href="https://existingperson08.itch.io/five-nights-at-filips">Five nights at Filip's (Alpha) by ExistingPerson08</a>
+            <!-- DISCORD WIDGET -->
+            <section class="section-card p-4">
+                <!-- Zmenšení písma -->
+                <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">
+                    NÁŠ DYKSCORD
+                </h2>
+                <div class="iframe-container mx-auto">
+                    <!-- Discord iframe -->
+                    <iframe
+                        src="https://discord.com/widget?id=1413566579555438626&theme=dark"
+                        class="discord-iframe border-black dark:border-green-400"
+                        allowtransparency="true"
+                        frameborder="0"
+                        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                    >
                     </iframe>
                 </div>
-                <!-- Hra 2 - Odstranění hover transformace -->
-                <div class="w-full max-w-xl mx-auto transition-transform">
-                    <iframe 
-                        frameborder="0" 
-                        src="https://itch.io/embed/4020283" 
-                        class="itch-iframe border-black dark:border-green-400"
-                        loading="lazy">
-                        <a href="https://existingperson08.itch.io/projekt-k">Projekt K by ExistingPerson08</a>
-                    </iframe>
+            </section>
+
+            <!-- mc server -->
+            <div class="mc-widget-container section-card p-4">
+                <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">
+                    MC SERVER
+                </h2>
+                <div class="mc-server-card">
+                    <div id="mc-loading">NAČÍTÁNÍ DAT...</div>
+
+                    <div id="mc-content" style="display: none">
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 10px;
+                                margin-bottom: 15px;
+                                text-align: center;
+                            "
+                        >
+                            <img
+                                id="mc-server-icon"
+                                class="mc-icon"
+                                src=""
+                                alt="Server Icon"
+                                style="margin: 0; flex-shrink: 0"
+                            />
+
+                            <div
+                                style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 4px;
+                                    width: 100%;
+                                "
+                            >
+                                <a
+                                    href="#"
+                                    id="copy-link"
+                                    onclick="
+                                        copyTextToClipboard(
+                                            event,
+                                            'ITkrouzek.aternos.me:64793',
+                                        )
+                                    "
+                                    ><h3
+                                        id="mc-ip-display"
+                                        class="mc-title"
+                                        style="
+                                            margin: 0;
+                                            line-height: 1.2;
+                                            text-align: center;
+                                            width: 100%;
+                                        "
+                                    ></h3
+                                ></a>
+                                <div
+                                    class="mc-info-text"
+                                    style="
+                                        font-size: 0.9rem;
+                                        text-align: center;
+                                        width: 100%;
+                                    "
+                                >
+                                    STAV:
+                                    <span
+                                        id="mc-status-text"
+                                        class="mc-status"
+                                    ></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr
+                            style="
+                                border: 0;
+                                border-top: 2px dashed currentColor;
+                                margin: 12px 0;
+                                opacity: 0.5;
+                            "
+                        />
+
+                        <div
+                            class="mc-info-text"
+                            style="
+                                display: flex;
+                                flex-direction: column;
+                                gap: 6px;
+                                margin-bottom: 12px;
+                                align-items: center;
+                                text-align: center;
+                                width: 100%;
+                            "
+                        >
+                            <div style="width: 100%; text-align: center">
+                                VERZE:
+                                <span
+                                    id="mc-version-text"
+                                    style="font-weight: bold"
+                                    >—</span
+                                >
+                            </div>
+                            <div style="width: 100%; text-align: center">
+                                HRÁČI:
+                                <span
+                                    id="mc-players-text"
+                                    style="font-weight: bold"
+                                    >0 / 0</span
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="mc-player-list"
+                            style="
+                                margin-top: 10px;
+                                display: flex;
+                                justify-content: center;
+                                flex-wrap: wrap;
+                                gap: 5px;
+                            "
+                        ></div>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- SEZNAM ČLENŮ -->
-        <section class="section-card p-5">
-            <!-- Zmenšení písma -->
-            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">KDO VŠECHNO JE RETARD?</h2>
-            <!-- Zmenšení písma a mezery -->
-            <div class="max-w-md mx-auto text-left font-mono">
-                <ul class="list-none space-y-2 text-base">
-                    <!-- Použití výrazných barev a efektů pro seznam -->
-                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
-                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> 
-                        <a href="https://existingperson08.github.io" target="_blank" class="text-blue-600 dark:text-cyan-400 hover:underline">
-                            ExistingPerson08
-                        </a> <span class="list-item-text">(Vlasta)</span>
-                    </li>
-                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
-                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> Caprisun <span class="list-item-text">(chleba)</span>
-                    </li>
-                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
-                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> 
-                        <a href="https://soundcloud.com/max-mueller-265471097" target="_blank" class="text-blue-600 dark:text-cyan-400 hover:underline">
-                            "Maxík Taxík"
-                        </a>
-                    </li>
-                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
-                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> Kládař <span class="list-item-text">(Jirka)</span>
-                    </li>
-                    <li class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900">
-                        <span class="text-red-600 dark:text-pink-400 font-extrabold">▶</span> Filip (retard/kokot)
-                    </li>
-                </ul>
-            </div>
-        </section>
-        
-        <footer class="text-sm opacity-50 pt-8 pb-4 font-mono">
-            // RETARDI.EXE v1.2 - NO VIRUS //<br>
-            This page is not intended to offend or ridicule anyone.
-        </footer>
+            <script>
+                // ZDE ZADEJ SVOJU ATERNOS IP ADRESU (bez portu)
+                const MC_SERVER_IP = "ITkrouzek.aternos.me:64793";
 
-    </main>
-</body>
+                async function updateMinecraftWidget() {
+                    try {
+                        const response = await fetch(
+                            `https://api.mcsrvstat.us/2/${MC_SERVER_IP}`,
+                        );
+                        const data = await response.json();
+
+                        // Přepnutí viditelnosti z načítání na obsah
+                        document.getElementById("mc-loading").style.display =
+                            "none";
+                        document.getElementById("mc-content").style.display =
+                            "block";
+                        document.getElementById("mc-ip-display").innerText =
+                            MC_SERVER_IP.toUpperCase();
+
+                        const iconEl =
+                            document.getElementById("mc-server-icon");
+                        const statusEl =
+                            document.getElementById("mc-status-text");
+                        const versionEl =
+                            document.getElementById("mc-version-text");
+                        const playersEl =
+                            document.getElementById("mc-players-text");
+                        const listEl =
+                            document.getElementById("mc-player-list");
+
+                        // Načtení ikony (pokud server nemá vlastní, API dodá výchozí z MC)
+                        iconEl.src = data.icon
+                            ? data.icon
+                            : "https://api.mcsrvstat.us/icon/" + MC_SERVER_IP;
+
+                        if (data.online === true) {
+                            // SERVER ONLINE
+                            statusEl.innerText = "ONLINE";
+                            statusEl.className = "mc-status online";
+                            versionEl.innerText = data.version || "NEZNÁMÁ";
+                            playersEl.innerText = `${data.players.online} / ${data.players.max}`;
+
+                            // Vypsání hráčů
+                            listEl.innerHTML = "";
+                            if (data.players.list) {
+                                data.players.list.forEach((player) => {
+                                    listEl.innerHTML += `<span class="mc-player-tag">${player.toUpperCase()}</span>`;
+                                });
+                            }
+                        } else {
+                            // SERVER OFFLINE
+                            statusEl.innerText = "OFFLINE";
+                            statusEl.className = "mc-status offline";
+                            versionEl.innerText = "—";
+                            playersEl.innerText = "0 / 0";
+                            listEl.innerHTML = "";
+                        }
+                    } catch (error) {
+                        console.error("Widget chyba:", error);
+                        document.getElementById("mc-loading").innerText =
+                            "CHYBA PŘIPOJENÍ K API";
+                    }
+                }
+
+                // Spuštění po načtení
+                updateMinecraftWidget();
+                // Auto-obnovení každých 5 minut (300000 ms) kvůli keši API
+                setInterval(updateMinecraftWidget, 300000);
+            </script>
+
+            <!-- NAŠE HRY (Skryté na malých obrazovkách) -->
+            <section class="hidden sm:block section-card p-4">
+                <!-- Zmenšení písma a zmenšení mezery nad ním -->
+                <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">
+                    NAŠE HRY
+                </h2>
+                <!-- Zmenšení mezery mezi hrami -->
+                <div class="space-y-4">
+                    <!-- Hra 1 - Odstranění hover transformace -->
+                    <div class="w-full max-w-xl mx-auto transition-transform">
+                        <iframe
+                            frameborder="0"
+                            src="https://itch.io/embed/4002684"
+                            class="itch-iframe border-black dark:border-green-400"
+                            loading="lazy"
+                        >
+                            <a
+                                href="https://existingperson08.itch.io/five-nights-at-filips"
+                                >Five nights at Filip's (Alpha) by
+                                ExistingPerson08</a
+                            >
+                        </iframe>
+                    </div>
+                    <!-- Hra 2 - Odstranění hover transformace -->
+                    <div class="w-full max-w-xl mx-auto transition-transform">
+                        <iframe
+                            frameborder="0"
+                            src="https://itch.io/embed/4020283"
+                            class="itch-iframe border-black dark:border-green-400"
+                            loading="lazy"
+                        >
+                            <a href="https://existingperson08.itch.io/projekt-k"
+                                >Projekt K by ExistingPerson08</a
+                            >
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEZNAM ČLENŮ -->
+            <section class="section-card p-5">
+                <!-- Zmenšení písma -->
+                <h2 class="text-2xl font-bold mb-4 border-b-2 pb-1">
+                    KDO VŠECHNO JE RETARD?
+                </h2>
+                <!-- Zmenšení písma a mezery -->
+                <div class="max-w-md mx-auto text-left font-mono">
+                    <ul class="list-none space-y-2 text-base">
+                        <!-- Použití výrazných barev a efektů pro seznam -->
+                        <li
+                            class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900"
+                        >
+                            <span
+                                class="text-red-600 dark:text-pink-400 font-extrabold"
+                                >▶</span
+                            >
+                            <a
+                                href="https://existingperson08.github.io"
+                                target="_blank"
+                                class="text-blue-600 dark:text-cyan-400 hover:underline"
+                            >
+                                ExistingPerson08
+                            </a>
+                            <span class="list-item-text">(Vlasta)</span>
+                        </li>
+                        <li
+                            class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900"
+                        >
+                            <span
+                                class="text-red-600 dark:text-pink-400 font-extrabold"
+                                >▶</span
+                            >
+                            Caprisun
+                            <span class="list-item-text">(chleba)</span>
+                        </li>
+                        <li
+                            class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900"
+                        >
+                            <span
+                                class="text-red-600 dark:text-pink-400 font-extrabold"
+                                >▶</span
+                            >
+                            <a
+                                href="https://soundcloud.com/max-mueller-265471097"
+                                target="_blank"
+                                class="text-blue-600 dark:text-cyan-400 hover:underline"
+                            >
+                                "Maxík Taxík"
+                            </a>
+                        </li>
+                        <li
+                            class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900"
+                        >
+                            <span
+                                class="text-red-600 dark:text-pink-400 font-extrabold"
+                                >▶</span
+                            >
+                            Kládař <span class="list-item-text">(Jirka)</span>
+                        </li>
+                        <li
+                            class="p-1 border-b border-dashed border-gray-400 dark:border-green-600 transition-colors hover:bg-yellow-200 dark:hover:bg-green-900"
+                        >
+                            <span
+                                class="text-red-600 dark:text-pink-400 font-extrabold"
+                                >▶</span
+                            >
+                            Filip (retard/kokot)
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <footer class="text-sm opacity-50 pt-8 pb-4 font-mono">
+                // RETARDI.EXE v1.2 - NO VIRUS //<br />
+                This page is not intended to offend or ridicule anyone.
+            </footer>
+        </main>
+        <script>
+            function copyTextToClipboard(event, textToCopy) {
+                // Zamezí tomu, aby odkaz obnovil stránku nebo skočil nahoru
+                event.preventDefault();
+
+                // Použití moderního API pro zápis do schránky
+                navigator.clipboard
+                    .writeText(textToCopy)
+                    .then(() => {
+                        // VIZUÁLNÍ ZPĚTNÁ VAZBA: Změna textu odkazu po úspěšném zkopírování
+                        const link = document.getElementById("copy-link");
+                        const originalText = link.innerText;
+
+                        link.innerText = "ZKOPÍROVÁNO!";
+
+                        // Po 2 sekundách vrátíme původní text
+                        setTimeout(() => {
+                            link.innerText = originalText;
+                        }, 2000);
+                    })
+                    .catch((err) => {
+                        console.error("Text se nepodařilo zkopírovat: ", err);
+                    });
+            }
+        </script>
+    </body>
 </html>
