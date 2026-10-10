@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="overflow-y-scroll">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Retardi (u nás)</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://kit.fontawesome.com/e762d14734.js" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="./Radioaktivitaci.png" type="image/x-icon">
+        <link rel="preload" href="./bg.webp" as="image">
+    </head>
+    <body
+        class="p-4 md:p-6 flex flex-col items-center min-h-screen"
+        style="
+            background-image: url(&quot;./bg.webp&quot;);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+    ">
+        <center class="w-full max-w-4xl space-y-8 text-center  border-4 border-black" style="background-color: #E7E6E7;">
+            <div class="text-center border-black border-b-2 ml-0 p-2">
+                <a href="./index.html" class="text-blue-600 hover:underline">Domov</a> |
+                <a href="./gamesky.html" class="text-blue-600 hover:underline">Gamesky</a> |
+                <a href="./screenshots.html" class="text-red-600 hover:underline">Sál retardace</a>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold mb-4 pb-1">HALL OF RETARDATION</h2>
+
+                <h3 class="text-xl font-bold mb-4">Average day in Russia</h3>
+                <p class="text-gray">Misery - ExistingP08, 333</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-2 m-auto mt-5 w-1/6">
+                    <img src="./screenshots/misery.png" onclick="openLightbox(this.src)" class="w-full h-40 object-cover cursor-pointer">
+                </div>
+
+                <h3 class="text-xl font-bold mb-4 mt-5">100 Days of Pain</h3>
+                <p class="text-gray">Minecraft (SRparasites) - ExistingP08, 333</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 m-auto mt-5 w-1/2">
+                    <img src="./screenshots/srp.png" onclick="openLightbox(this.src)" class="w-full h-40 object-cover cursor-pointer">
+                    <img src="./screenshots/srp2.png" onclick="openLightbox(this.src)" class="w-full h-40 object-cover cursor-pointer">
+                    <img src="./screenshots/srp3.png" onclick="openLightbox(this.src)" class="w-full h-40 object-cover cursor-pointer">
+                </div>
+
+                <h3 class="text-xl font-bold mb-4 mt-5">The Meeting</h3>
+                <p class="text-gray">The Forest - ExistingP08, Andrew, Maxik</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-2 m-auto mt-5 mb-3 w-1/2">
+                    <img src="./screenshots/forest1.jpg" onclick="openLightbox(this.src)" class="w-full h-40 object-cover cursor-pointer">
+                    <img src="./screenshots/forest2.jpg" onclick="openLightbox(this.src)" class="w-full h-40 object-cover cursor-pointer">
+                </div>
+
+                <!-- Lightbox -->
+                <div id="lightbox" class="fixed inset-0 bg-black/90 flex items-center justify-center p-4 hidden" onclick="this.classList.add('hidden')">
+                    <img id="lightbox-img" class="max-w-full max-h-full object-contain">
+                </div>
+
+                <script>
+                  function openLightbox(src) {
+                    document.getElementById('lightbox-img').src = src;
+                    document.getElementById('lightbox').classList.remove('hidden');
+                  }
+
+                  document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape') document.getElementById('lightbox').classList.add('hidden');
+                  });
+                </script>
+
+                <br>
+            </div>
+        </center>
+    </body>
+</html>
