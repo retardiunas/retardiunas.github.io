@@ -4,21 +4,23 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Retardi (u nás)</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://kit.fontawesome.com/e762d14734.js" crossorigin="anonymous"></script>
-        <link rel="shortcut icon" href="./Radioaktivitaci.png" type="image/x-icon">
-        <link rel="preload" href="./bg.webp" as="image">
+        <link rel="stylesheet" href="./assets/style.css">
+        <link rel="shortcut icon" href="./assets/Radioaktivitaci.png" type="image/x-icon">
+        <link rel="preload" href="./assets/bg.webp" as="image" type="image/webp">
+
+        <style>
+            body {
+                background-image: url("./assets/bg.webp");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+        </style>
     </head>
-    <body
-        class="p-4 md:p-6 flex flex-col items-center min-h-screen"
-        style="
-            background-image: url(&quot;./bg.webp&quot;);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-    ">
+    <body class="p-1 md:p-6 flex flex-col items-center min-h-screen">
+
         <center class="w-full max-w-4xl space-y-8 text-center  border-4 border-black" style="background-color: #E7E6E7;">
-            <div class="text-center border-black border-b-2 ml-0 p-2">
+            <div class="text-center border-black border-b-2 ml-0 p-2 text-xl md:text-base">
                 <a href="./index.html" class="text-blue-600 hover:underline">Domov</a> |
                 <a href="./gamesky.html" class="text-red-600 hover:underline">Gamesky</a> |
                 <a href="./screenshots.html" class="text-blue-600 hover:underline">Sál retardace</a>
@@ -32,7 +34,7 @@
 
                 <br>
 
-                <div class="flex items-center gap-4 p-4 w-2/3 m-auto rounded-lg">
+                <div class="flex items-center gap-4 p-4 md:w-2/3 m-auto rounded-lg">
                   <img src="./gamesky/fnaf.png" alt="Game thumbnail" class="w-32 h-28 object-cover rounded">
 
                   <div class="flex flex-col w-full">
@@ -48,7 +50,7 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-4 p-4 w-2/3 m-auto rounded-lg">
+                <div class="flex items-center gap-4 p-4 md:w-2/3 m-auto rounded-lg">
                   <img src="./gamesky/mozek.png" alt="Game thumbnail" class="w-32 h-28 object-cover rounded">
 
                   <div class="flex flex-col w-full">
