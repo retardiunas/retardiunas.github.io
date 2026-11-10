@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ExsitingPerSONovy poznámky</title>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: black;
+            color: white;
+            margin: 0;
+            padding: clamp(16px, 6vw, 80px);
+            font-size: 120%;
+        }
+
+        h1 { color: lightblue; }
+        h1, h2 { width: fit-content; max-width: 100%; scroll-margin-top: 4rem; }
+
+        a { color: lightblue; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        :target:is(h1, h2, h3, h4, h5, a, span) {
+            background: yellow;
+            color: black;
+        }
+
+        pre { font-size: 115%; white-space: pre-line; }
+
+        .box {
+            box-sizing: border-box;
+            width: fit-content;
+            max-width: 100%;
+            padding: 20px 50px 20px 30px;
+            border: 3px solid coral;
+        }
+
+        .main { min-height: 100svh; }
+
+        /* button style */
+        .radio-b input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .radio-b label {
+            display: inline-block;
+            padding: .2em .8em;
+            margin: 0 .3em .5em 0;
+            border: 1px solid #888;
+            border-radius: 1em;
+            cursor: pointer;
+        }
+        .radio-b input:checked + label { background: #333; }
+        .radio-b input:focus-visible + label { outline: 2px solid #09f; }
+
+        /* zoom */
+        .zoom {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: #111;
+            border: 1px solid #888;
+            border-radius: 1em;
+            padding: .3em .6em 0;
+            font-size: 90%;
+        }
+        html:has(#z-80:checked)  .content { zoom: 0.8; }
+        html:has(#z-125:checked) .content { zoom: 1.25; }
+        html:has(#z-150:checked) .content { zoom: 1.5; }
+
+        /* filtr */
+        .search ul { list-style: none; padding: 0; }
+        .search li {
+            font-size: 115%;
+            overflow: hidden;
+            max-height: 1.5em;
+            transition: 1s all;
+        }
+        .search:has(#f-matika:checked) li:not([data-tagy~="matika"]),
+        .search:has(#f-tvy:checked)    li:not([data-tagy~="tvy"]) {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        /* mobile */
+        @media (max-width: 600px) {
+            body {
+                font-size: 100%;
+                padding-bottom: 6rem;
+            }
+            .box { padding: 15px; }
+
+            .zoom {
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-width: 1px 0 0;
+                border-radius: 1em 1em 0 0;
+                padding: .6em .5em 0;
+                text-align: center;
+            }
+
+            .radio-b label { padding: .45em 1em; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .search li { transition: none; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <div class="zoom radio-b">
+        <a href="#top">Zpět nahoru</a> |
+        Zoom:
+        <input type="radio" name="zoom" id="z-80"><label for="z-80">80 %</label>
+        <input type="radio" name="zoom" id="z-100" checked><label for="z-100">100 %</label>
+        <input type="radio" name="zoom" id="z-125"><label for="z-125">125 %</label>
+        <input type="radio" name="zoom" id="z-150"><label for="z-150">150 %</label>
+    </div>
+
+    <div class="content">
+        <div class="main">
+            <h1>Poznámky</h1>
+
+            <div class="search">
+                <div class="radio-b">
+                    <input type="radio" name="filtr" id="f-all" checked><label for="f-all">Vše</label>
+                    <input type="radio" name="filtr" id="f-matika"><label for="f-matika">Matika</label>
+                    <input type="radio" name="filtr" id="f-tvy"><label for="f-tvy">Technické vybavení</label>
+                </div>
+
+                <ul>
+                    <li data-tagy="matika"><a href="#vzorecky">Vzorečky</a></li>
+                    <li data-tagy="tvy">Převody soustav</li>
+                </ul>
+            </div>
+        </div>
+
+        <h1>Matika</h1>
+
+        <h2 id="vzorecky">Vzorečky</h2>
+
+        <div class="box">
+            <b>Umocnění mnohočlenů</b>
+            <pre>
+            (a + b)² = a² + 2ab + b²
+            (a - b)² = a² - 2ab + b²
+            (a + b)³ = a³ + 3a²b + 3ab² + b³
+            (a - b)³ = a³ - 3a²b + 3ab² - b³
+            </pre>
+        </div>
+    </div>
+
+</body>
+</html>
